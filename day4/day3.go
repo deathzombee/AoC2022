@@ -31,10 +31,21 @@ func main() {
 	for scanner.Scan() {
 		ret = append(ret, scanner.Text())
 	}
+	colli := 0
 	glbAccu := 0
 	accu2 := []int{}
+	//collision is doesnt require backwards search so we can piggyback on the first loop
+	// this saves a lot of calls to terser(), but this is a hack job so whatever
+	// should probably make a data structure to hold all the returns from terser in one loop
+	// and reuse it in the second loop
 	for i := 0; i < len(ret); i++ {
-		if sat(ret[i], i, 0, 1) == 1 {
+		in := terser(ret[i])
+		if collision(in[0], in[1]) {
+
+			colli++
+
+		}
+		if sat(in, i, 0, 1) == 1 {
 			glbAccu++
 			accu2 = append(accu2, i)
 		}
@@ -42,14 +53,27 @@ func main() {
 	//for numbers not in accu2 rerun scan backwards
 	for i := 0; i < len(ret); i++ {
 		if !contains(accu2, i) {
-			if sat(ret[i], i, 1, 0) == 1 {
+			in := terser(ret[i])
+			if sat(in, i, 1, 0) == 1 {
 				glbAccu++
 				accu2 = append(accu2, i)
 			}
 		}
 	}
 	println(glbAccu)
+	println(colli)
+}
 
+func collision(s []string, e []string) bool {
+	for _, v := range s {
+		for _, v2 := range e {
+			if v == v2 {
+				return true
+			}
+
+		}
+	}
+	return false
 }
 
 func contains(accu2 []int, i int) bool {
@@ -62,35 +86,36 @@ func contains(accu2 []int, i int) bool {
 
 }
 
-func sat(s string, b int, c int, d int) int {
+func sat(s [2][]string, b int, c int, d int) int {
 	accu := 0
-	rp := strings.Split(s, ",")
-	rp1 := strings.Split(rp[0], "-")
-	rp2 := strings.Split(rp[1], "-")
-	rinp1 := make([]int, len(rp1))
-	range1list := make([]string, 0)
-	for i := 0; i < len(rp1); i++ {
-		rinp1[i], _ = strconv.Atoi(rp1[i])
-	}
-	for i := rinp1[0]; i <= rinp1[1]; i++ {
-		range1list = append(range1list, string(rune(i)))
-	}
-	rinp2 := make([]int, len(rp2))
-	range2list := make([]string, 0)
-	for i := 0; i < len(rp1); i++ {
-		rinp2[i], _ = strconv.Atoi(rp2[i])
-	}
-	for i := rinp2[0]; i <= rinp2[1]; i++ {
-		range2list = append(range2list, string(rune(i)))
-	}
-	var superrange [2][]string
-	superrange[0] = range1list
-	superrange[1] = range2list
-	found := subsets.ArrayIsSubset_BruteForce(superrange[c], superrange[d], true)
+
+	found := subsets.ArrayIsSubset_BruteForce(s[c], s[d], true)
 	if found {
 		accu = 1
 	} else {
 		accu = 0
 	}
 	return accu
+}
+func terser(s string) [2][]string {
+	rp := strings.Split(s, ",")
+	rp1 := strings.Split(rp[0], "-")
+	rp2 := strings.Split(rp[1], "-")
+	rinp1 := make([]int, len(rp1))
+	rinp2 := make([]int, len(rp2))
+	var superrange [2][]string
+	for i := 0; i < len(rp1); i++ {
+		rinp1[i], _ = strconv.Atoi(rp1[i])
+	}
+	for i := rinp1[0]; i <= rinp1[1]; i++ {
+		superrange[0] = append(superrange[0], string(rune(i)))
+	}
+	for i := 0; i < len(rp1); i++ {
+		rinp2[i], _ = strconv.Atoi(rp2[i])
+	}
+	for i := rinp2[0]; i <= rinp2[1]; i++ {
+		superrange[1] = append(superrange[1], string(rune(i)))
+	}
+
+	return superrange
 }
