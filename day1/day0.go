@@ -21,7 +21,7 @@ func main() {
 	fmt.Println(maximum(ret))
 
 }
-func maximum (a []int) int {
+func maximum(a []int) int {
 	max := a[0]
 	for _, v := range a {
 		if v > max {
@@ -50,8 +50,8 @@ func tb() []int {
 			//add to array
 			arr = append(arr, accum)
 			accum = 0
-		}else {
-			t, _ :=strconv.Atoi(scanner.Text())
+		} else {
+			t, _ := strconv.Atoi(scanner.Text())
 			accum += t
 		}
 
