@@ -19,6 +19,25 @@ func main() {
 
 	ret := tb()
 	fmt.Println(maximum(ret))
+	fmt.Println(top3sum(ret))
+
+}
+func top3sum(a []int) int {
+	m1 := maximum(a)
+	a = remove(a, m1)
+	m2 := maximum(a)
+	a = remove(a, m2)
+	m3 := maximum(a)
+	return m1 + m2 + m3
+}
+
+func remove(a []int, m1 interface{}) []int {
+	for i, v := range a {
+		if v == m1 {
+			a = append(a[:i], a[i+1:]...)
+		}
+	}
+	return a
 
 }
 func maximum(a []int) int {
