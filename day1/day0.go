@@ -13,7 +13,7 @@ func main() {
 	// if input.txt does not exist run grab.go
 	if _, err := os.Stat("input.txt"); os.IsNotExist(err) {
 		log.Println("input.txt does not exist, running grab.go")
-		grab.Grab()
+		grab.Grab("1")
 
 	}
 
