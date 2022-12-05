@@ -2,3 +2,5 @@ github.com/JeremyOne/runeTree v0.0.0-20160222094504-56ed0cf17e6d h1:XSyQOzK48onH
 github.com/JeremyOne/runeTree v0.0.0-20160222094504-56ed0cf17e6d/go.mod h1:Eh1tZjXr9A+gmv7RKPqMrae3FB+oUVzmPPc2v7Fr67o=
 github.com/JeremyOne/subsets v0.0.0-20160222165039-9e916bfd7977 h1:D8bQQMzOJhmlRs75vmEzQwIG0rNcEZFp6Pa7Axs7aEA=
 github.com/JeremyOne/subsets v0.0.0-20160222165039-9e916bfd7977/go.mod h1:pqGW78/cxirEs0+HirzINMjckeryrLZu5BPCYQOqOL4=
+golang.org/x/tools v0.3.0 h1:SrNbZl6ECOS1qFzgTdQfWXZM9XBkiA6tkFrH9YSTPHM=
+golang.org/x/tools v0.3.0/go.mod h1:/rWhSS2+zyEVwoJf8YAX6L2f0ntZ7Kn/mGgAWcipA5k=
