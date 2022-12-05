@@ -2,10 +2,10 @@ package main
 
 import (
 	"bufio"
+	_ "day2/grab"
 	"fmt"
-	_"log"
+	_ "log"
 	"os"
-	_"day2/grab"
 	"strings"
 )
 
