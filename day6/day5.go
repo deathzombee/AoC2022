@@ -27,7 +27,6 @@ func main() {
 			eh = ret[i : i+14]
 			//check if each character is unique
 			if unique(eh) {
-				//if eh[0] != eh[1] && eh[0] != eh[2] && eh[0] != eh[3] && eh[0] != eh[4] && eh[1] != eh[2] && eh[1] != eh[3] && eh[1] != eh[4] && eh[2] != eh[3] && eh[2] != eh[4] && eh[3] != eh[4] {
 				fmt.Println(i + 14)
 				fmt.Println(string(eh))
 
